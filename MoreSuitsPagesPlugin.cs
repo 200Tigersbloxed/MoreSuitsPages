@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections;
-using BepInEx;
+﻿using BepInEx;
 using MoreSuits;
+#if DEBUG
+using System;
+using System.Collections;
 using UnityEngine;
+#endif
 
 namespace MoreSuitsPages
 {
@@ -20,7 +22,9 @@ namespace MoreSuitsPages
         {
             if (!_pages.Loaded) return;
             SuitSorter.RegisterSorter("pages", _pages);
+#if DEBUG
             StartCoroutine(c());
+#endif
         }
 
         private void Update()
@@ -28,7 +32,8 @@ namespace MoreSuitsPages
             if(!_pages.Loaded) return;
             _pages.Update();
         }
-
+        
+#if DEBUG
         private IEnumerator c()
         {
             SuitSorter none;
@@ -40,5 +45,6 @@ namespace MoreSuitsPages
                 yield return new WaitForSeconds(10);
             }
         }
+#endif
     }
 }
